@@ -1,0 +1,31 @@
+@media screen and (max-width:568px) {
+    .header{
+        background-position:-200px ;
+    }
+    .header .header-content{
+        align-items: start !important;
+    }
+    h1{
+       font-size: 45px; 
+    }
+    .contact p , .contact form{
+        width: 100% !important;
+    }
+}
+@media screen and (max-width:991px) {
+    .w-fc{
+        width: fit-content;
+    }
+}
+@media screen and (max-width:768px) {
+    .border-none{
+        border: none !important;
+    }
+    .download.resume .brands{
+        justify-content: center;
+    }
+    .download.resume .download{
+        text-align: center;
+        margin-bottom: 2rem
+    }
+}
