@@ -55,3 +55,65 @@ for(let i=0;i<navLinks.length;i++) {
         });
     });
 }
+
+// Contact Form
+const contactForm = document.querySelector('.contact-form form');
+const sendBtn = document.querySelector('.send-btn');
+const nameInput = document.querySelector('input[name="name"]');
+const emailInput = document.querySelector('input[name="email"]');
+const subjectInput = document.querySelector('input[name="subject"]');
+const messageInput = document.querySelector('textarea[name="message"]');
+
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Show loading state
+    sendBtn.textContent = 'Sending...';
+    sendBtn.disabled = true;
+
+    // Prepare template parameters
+    const templateParams = {
+        from_name: nameInput.value,
+        from_email: emailInput.value,
+        subject: subjectInput.value,
+        message: messageInput.value
+    };
+
+    // Send email using EmailJS
+    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+        .then(() => {
+            // Show success message
+            alert('Message sent successfully!');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Reset button
+            sendBtn.textContent = 'Send Message';
+            sendBtn.disabled = false;
+        })
+        .catch((error) => {
+            // Show error message
+            console.error('Error:', error);
+            alert('Failed to send message. Please try again.');
+            
+            // Reset button
+            sendBtn.textContent = 'Send Message';
+            sendBtn.disabled = false;
+        });
+});
+
+// Add floating label animation
+const formControls = document.querySelectorAll('.form-control');
+
+formControls.forEach(control => {
+    control.addEventListener('focus', function() {
+        this.parentElement.classList.add('focused');
+    });
+    
+    control.addEventListener('blur', function() {
+        if (!this.value) {
+            this.parentElement.classList.remove('focused');
+        }
+    });
+});
